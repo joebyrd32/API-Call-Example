@@ -15,7 +15,7 @@ public class Main {
         String iso4217 = scanner.nextLine();
         DataSet dataSet = Utils.GetCurrencies(USDExchangeRatesAddress, iso4217);
         Utils.CleanDataSet(dataSet, currenciesUri);
-        List<CryptoCurrencies> cryptos = Utils.GetCurrencies(BinanceAddress);
+        List<CryptoCurrencies> cryptos = Utils.GetCryptoCurrencies(BinanceAddress);
         //Display data
         OutputList(dataSet, cryptos);
 
@@ -26,10 +26,10 @@ public class Main {
         String symbol = "";
         System.out.printf("\n\n\n%-10s  %-25s  %-10s\n" ,"Symbol" ,"Value in chosen currency" ,"Change vs BTC");
         for(CryptoCurrencies cc : cryptos){
-            symbol = cc.symbol.substring(0,cc.symbol.length()-3);
-            if(cc.symbol.substring(cc.symbol.length() - 3).equals("BTC") && dataSet.data.rates.containsKey(symbol)){
-                double amountInChosenCurrency = 1 / dataSet.data.rates.get(symbol);
-                System.out.printf("%-10s  %-25s  %-10s\n" ,symbol ,amountInChosenCurrency ,cc.priceChangePercent);
+            symbol = cc.getSymbol().substring(0,cc.getSymbol().length()-3);
+            if(cc.getSymbol().substring(cc.getSymbol().length() - 3).equals("BTC") && dataSet.getData().getRates().containsKey(symbol)){
+                double amountInChosenCurrency = 1 / dataSet.getData().getRates().get(symbol);
+                System.out.printf("%-10s  %-25s  %-10s\n" ,symbol ,amountInChosenCurrency ,cc.getPriceChangePercent());
             }
         }
     }

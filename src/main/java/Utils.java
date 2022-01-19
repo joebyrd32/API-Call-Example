@@ -18,7 +18,7 @@ public class Utils {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(currenciesUri));
             while ((line = reader.readLine()) != null) {
-                dataSet.data.rates.remove(line.split(",")[0]);
+                dataSet.getData().getRates().remove(line.split(",")[0]);
             }
         }catch (Exception e){
             System.out.println(e.toString());
@@ -50,7 +50,7 @@ public class Utils {
         }
     }
 
-    static List<CryptoCurrencies> GetCurrencies(String binanceAddress) {
+    static List<CryptoCurrencies> GetCryptoCurrencies(String binanceAddress) {
         try{
             URL url = new URL(binanceAddress);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
